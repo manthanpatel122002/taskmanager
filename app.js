@@ -1,6 +1,8 @@
 const express = require("express")
 const cors = require("cors")
 const bcrypt = require("bcryptjs")
+require('dotenv').config()
+console.log(".env data ", process.env.PORT);
 
 let app = express()
 
@@ -16,6 +18,6 @@ app.use(express.urlencoded({extended:true}))
 const indexRoute = require("./routes/index.js");
 app.use(indexRoute)
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   console.log("App Is Listen Successfully!!!!");
 });

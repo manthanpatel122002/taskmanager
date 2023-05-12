@@ -11,8 +11,8 @@ route.post("/forgotPassword", forgotPasswordHandler);
 route.post("/createPassword/:token", createPassword);
 
 route.post("/",checkLogin,postHandler)
-route.get("/",checkLogin,getHandler)
-route.put("/",checkLogin,putHandler);
-route.delete("/",checkLogin,deleteHandler);
+route.get("/list",checkLogin,getHandler)
+route.put("/:uId", checkLogin, putHandler);
+route.delete("/:dId",checkLogin,deleteHandler);
 
 module.exports =  route ;

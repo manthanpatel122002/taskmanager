@@ -28,16 +28,42 @@ async function postHandler(req, res) {
   return res.status(200).send({message:"Task created successfully."})
 }
 
-function getHandler(req, res) {
-  return res.send({ name: getHandler });
+async function getHandler(req, res) {
+
+  let taskData = await task.findAll({})
+  return res.status(200).send({message:"data found",data:taskData})
 }
 
-function putHandler(req, res) {
-  return res.send({ name: putHandler });
+async function putHandler(req, res) {
+
+  let {uId} = req.params;
+  let { title, details, status, userData } = req.body;
+
+  let updatedData = await task.update(
+    {
+      title: title,
+      details: details,
+      status: status,
+    },
+    {
+      where:{
+        id:uId,
+      }
+    }
+  );
+  return res.status(200).send({message:"task updated successfully.."})
 }
 
-function deleteHandler(req, res) {
-  return res.send({ name: deleteHandler });
+async function deleteHandler(req, res) {
+  
+  let {dId} = req.params
+
+  deleteData = await task.destroy({
+    where:{
+      customerId:dId
+    }
+  })
+  return res.status(200).send({message:"task deleted successfully"})
 }
 
 module.exports = { postHandler, getHandler, putHandler, deleteHandler };

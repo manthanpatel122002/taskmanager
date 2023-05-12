@@ -19,6 +19,7 @@ async function loginHandler(req, res) {
       where: {
         email: email,
       },
+      raw:true,
     });
 
     if (!isAvailable) {
@@ -34,7 +35,7 @@ async function loginHandler(req, res) {
     }
 
     //genrate jwt token
-    let token = jwt.sign({ ...isAvailable }, jwtSec, { expiresIn: 60 });
+    let token = jwt.sign({ ...isAvailable }, jwtSec, { expiresIn: 60*60 });
     console.log("token", token);
 
     await session.create({
@@ -43,7 +44,7 @@ async function loginHandler(req, res) {
       status: "validUser",
     });
 
-    return res.status(200).send({ message: "User succesfully login" });
+    return res.status(200).send({ message: "User succesfully login",token:token });
   } catch (err) {
     return res.status(400).send({ message: err.message });
   }
