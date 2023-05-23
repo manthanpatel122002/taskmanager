@@ -5,7 +5,7 @@ session = db.session;
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const {signupSchema,loginSchema,forgotPasswordSchema,createPasswordSchema} = require("../validations/auth");
-let jwtSec = "manthanpatel122002";
+let   jwtSec = "manthanpatel122002";
 var salt = bcrypt.genSaltSync(10);
 
 async function loginHandler(req, res) {
